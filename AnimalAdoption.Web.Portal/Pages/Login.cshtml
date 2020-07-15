@@ -1,0 +1,32 @@
+﻿@page
+@model AnimalAdoption.Web.Identity.Pages.LoginModel
+@{
+    ViewData["Title"] = "Log in";
+}
+<h1>Log in</h1>
+<h2>Enter the password then click on your avatar to proceed. </h2>
+
+
+<form method="post">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <label asp-for="Password">Enter the global password </label> <br />
+    <input asp-for="Password" /><br />
+    <span class="text-danger" asp-validation-for="Password"></span>
+    <br />
+    <div class="row">
+        @{ foreach (var login in Model.LogonIds)
+            {
+                <div class="col-sm-4 auth-button-grid">
+                    <button type="submit" class="auth-button" name="AvatarId" value="@login">
+                        <img src="~/images/auth/@(login).jpg" alt="@(login)" />
+                    </button>
+                </div>
+            }
+        }
+    </div>
+</form>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

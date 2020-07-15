@@ -1,0 +1,16 @@
+﻿@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Error - Missing Environment Variable";
+}
+
+<h1 class="text-danger">Error.</h1>
+<h3 class="text-danger">The "GlobalPassword" environment variable is missing</h3>
+
+<p>
+    In development the <strong>appsettings.Development.json</strong> configuration contains this value for testing purposes. In production it will need to be provided during runtime.
+</p>
+<p>
+    <strong>For information on how to provide settings on an Azure Web App, refer to the following page.</strong>
+    <a href="https://docs.microsoft.com/en-us/azure/app-service/configure-common#configure-app-settings">Configure App Settings in Azure App Service</a>
+</p>

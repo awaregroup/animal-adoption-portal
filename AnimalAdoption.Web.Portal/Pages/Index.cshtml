@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div>
+    <h1>Animal Information</h1>
+    <table class='table table-striped'>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Age</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var animal in Model.Animals)
+            {
+                <tr key=@animal.Id>
+                    <td>@animal.Id</td>
+                    <td>@animal.Name</td>
+                    <td>@animal.Description</td>
+                    <td>@animal.Age</td>
+                    <td><img alt="@animal.Name" src="~/images/pets/@(animal.Id).jpg" height="100px" width="100px" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
