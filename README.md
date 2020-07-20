@@ -14,7 +14,7 @@ Install the following prerequisites:
 
 Clone the Git repository and open the root folder in Visual Studio / Visual Studio Code. Push F5 to start debugging.
 
-We recommend using a free [Windows Virtual Machine]](https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/) for development if your development environment does not support installation of the .NET Core SDK.
+We recommend using a free [Windows Virtual Machine](https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/) for development if your development environment does not support installation of the .NET Core SDK.
 
 When the services are running you can view and interact with the front end portal [here](http://localhost:9000/).
 
