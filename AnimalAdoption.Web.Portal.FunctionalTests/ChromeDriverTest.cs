@@ -33,7 +33,7 @@ namespace AnimalAdoption.Web.Portal.FunctionalTests
             // Remember to set this in the build pipeline
             var url = Environment.GetEnvironmentVariable("ANIMAL_ADOPTION_FUNCTIONAL_TEST_PATH") ?? "http://localhost:9000";            
             _driver.Url = url;
-            var xPathToCheck = "/html/body/div/div/div/div/table/tbody/tr[1]/td[2]";
+            var xPathToCheck = "/html/body/div/main/div/table/tbody/tr[1]/td[2]";
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             var returnedAnimal = wait.Until((d) =>
             {
