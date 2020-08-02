@@ -30,7 +30,7 @@ namespace AnimalAdoption.Web.Portal.FunctionalTests
         [TestMethod]
         public void HomePage_LoadPage_LoadsAnimalsIn10Seconds()
         {
-            // Remember to set this in the build pipeline
+            // Remember to set this in the release pipeline
             var url = Environment.GetEnvironmentVariable("ANIMAL_ADOPTION_FUNCTIONAL_TEST_PATH") ?? "http://localhost:9000";            
             _driver.Url = url;
             var xPathToCheck = "/html/body/div/main/div/table/tbody/tr[1]/td[2]";
