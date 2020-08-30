@@ -45,7 +45,9 @@ namespace AnimalAdoption.Web.Portal.FunctionalTests
         [TestCleanup]
         public void ChromeDriverCleanup()
         {
-            _driver.Quit();
+            if (_driver != null) {
+                _driver.Quit();
+            }
         }
     }
 }
