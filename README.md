@@ -1,3 +1,5 @@
+https://github.com/ruskindantra/animal-adoption-portal/workflows/.NET&nbsp;CORE/badge.svg
+
 # Introduction
 This repository contains an example web portal for a hypothetical animal adoption agency for the purposes of the DevOps Azure Sprint Series. This code has been intentionally developed as a simple demonstration and should not be used as a base for any production development. For more information on how to develop microservices and .NET Core services please refer to the following links.
 
