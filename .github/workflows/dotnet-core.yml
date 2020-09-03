@@ -38,7 +38,7 @@ jobs:
       with:
         name: published_portal
         path: ${{ github.workspace }}/AnimalAdoption.Web.Portal/published
-    - name: Output Run ID
+    - name: Output Repository
       run: echo ${{ github.repository }}
     - name: Output Actor
       run: echo ${{ github.actor }}
