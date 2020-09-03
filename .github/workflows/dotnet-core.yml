@@ -24,7 +24,7 @@ jobs:
         version: 1.0.0
       run: dotnet pack -o . -p:PackageVersion=$version.${{ github.run_number }}
     - name: Add NuGet Source
-      run: dotnet nuget add source https://nuget.pkg.github.com/${{ ${{ secrets.REPO_OWNER }} }}/index.json -n github -u ${{ secrets.REPO_OWNER }} -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+      run: dotnet nuget add source https://nuget.pkg.github.com/${{ secrets.REPO_OWNER }}/index.json -n github -u ${{ secrets.REPO_OWNER }} -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
     - name: Publish NuGet Package
       run: dotnet nuget push *.nupkg --source "github" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
     - name: Build
