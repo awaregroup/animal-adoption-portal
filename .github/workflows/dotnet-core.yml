@@ -19,10 +19,12 @@ jobs:
         dotnet-version: 3.1.301
     - name: Install dependencies
       run: dotnet restore
-    - name: Pack Logic
+    - name: Dotnet pack
       run: dotnet pack
-    - name: Nuget Push
-      run: dotnet nuget push *.nupkg
+    - name: Add NuGet Source
+      run: dotnet nuget add source https://nuget.pkg.github.com/ruskindantra/index.json -n github -u ruskindantra -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+    - name: Publish NuGet Package
+      run: dotnet nuget push "*.nupkg" --source "github" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
