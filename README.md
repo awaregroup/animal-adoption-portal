@@ -6,7 +6,7 @@ This repository contains an example web portal for a hypothetical animal adoptio
 
 
 # Instructions
-
+#test
 Install the following prerequisites:
 - [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/3.1)
 - [Visual Studio Code](https://visualstudio.microsoft.com/downloads/)
