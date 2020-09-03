@@ -36,3 +36,11 @@ jobs:
       with:
         name: published_portal
         path: ${{ github.workspace }}/AnimalAdoption.Web.Portal/published
+  deploy:
+    needs: build
+    - uses: actions/download-artifact@v2
+      with:
+        name: published_portal
+    - name: Display structure of downloaded files
+      run: ls -R
+
