@@ -23,7 +23,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Dotnet pack
-      run: dotnet pack -o . -p:PackageVersion=$env.VERSION.${{ github.run_number }}
+      run: dotnet pack -o . -p:PackageVersion=${{ env.VERSION }}.${{ github.run_number }}
     - name: Add NuGet Source
       run: dotnet nuget add source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json -n github -u ${{ github.repository_owner }} -p ${{ secrets.PACKAGES_PAT }} --store-password-in-clear-text
     - name: Publish NuGet Package
