@@ -19,7 +19,3 @@ Clone the Git repository and open the root folder in Visual Studio / Visual Stud
 We recommend using a free [Windows Virtual Machine](https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/) for development if your development environment does not support installation of the .NET Core SDK.
 
 When the services are running you can view and interact with the front end portal [here](http://localhost:9000/).
-
-Hello world
-
-
