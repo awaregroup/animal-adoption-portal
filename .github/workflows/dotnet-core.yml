@@ -19,8 +19,8 @@ jobs:
         dotnet-version: 3.1.301
     - name: Install dependencies
       run: dotnet restore
-    - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
+    - name: Pack Logic
+      run: dotnet pack
     - name: Nuget Push
       run: nuget push *.nupkg
     - name: Build
