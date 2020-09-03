@@ -10,6 +10,7 @@ namespace AnimalAdoption.Common.Logic
             new Animal { Id = 1, Name = "Sedi", Age = 50, Description = "Soft natured" },
             new Animal { Id = 2, Name = "Metamorph", Age = 50, Description = "Under a lot of pressure" },
             new Animal { Id = 3, Name = "Igno", Age = 50, Description = "Shiny and glasslike" },
+            new Animal { Id = 4, Name = "Meery", Age = 30, Description = "Scared as an individual, fiesty in a group" }
         };
     }
 }
