@@ -3,8 +3,6 @@ name: .NET Core
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
@@ -19,7 +17,22 @@ jobs:
         dotnet-version: 3.1.301
     - name: Install dependencies
       run: dotnet restore
+    - name: Dotnet pack
+      env:
+        version: 1.0.0
+      run: dotnet pack -o . -p:PackageVersion=$version.${{ github.run_number }}
+    - name: Add NuGet Source
+      run: dotnet nuget add source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json -n github -u ${{ github.repository_owner }} -p ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+    - name: Publish NuGet Package
+      run: dotnet nuget push *.nupkg --source "github" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
-      run: dotnet test AnimalAdoption.Web.Portal.UnitTests
+      run: dotnet test AnimalAdoption.Web.Portal.UnitTests --no-restore --verbosity normal
+    - name: Publish
+      run: dotnet publish AnimalAdoption.Web.Portal -o AnimalAdoption.Web.Portal/published
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: published_portal
+        path: ${{ github.workspace }}/AnimalAdoption.Web.Portal/published
