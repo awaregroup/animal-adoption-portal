@@ -40,7 +40,7 @@ jobs:
         path: ${{ github.workspace }}/AnimalAdoption.Web.Portal/published
     - name: Output Repository
       env:
-        REPOSITORY: ${{ toJson(${{ github.repository }}) }}
+        REPOSITORY: ${{ github.repository }}
       run: echo "$REPOSITORY"
     - name: Output Actor
       run: echo ${{ github.actor }}
