@@ -39,7 +39,7 @@ jobs:
       with:
         name: published_portal
         path: ${{ github.workspace }}/AnimalAdoption.Web.Portal/published
-  deploy:
+  deploy_azure:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -53,7 +53,7 @@ jobs:
         publish-profile: ${{ secrets.PUBLISH_CREDENTIALS_DEV }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
   update_settings:
-    needs: deploy
+    needs: deploy_azure
     runs-on: ubuntu-latest
     steps:
     - uses: azure/login@v1.1
