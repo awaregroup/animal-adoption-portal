@@ -52,4 +52,12 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.PUBLISH_CREDENTIALS_DEV }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-
+  update_settings:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: azure/login@v1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - run: |
+        az webapp list --query "[?state=='Running']"
