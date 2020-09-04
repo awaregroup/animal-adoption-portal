@@ -39,7 +39,7 @@ jobs:
       with:
         name: published_portal
         path: ${{ github.workspace }}/AnimalAdoption.Web.Portal/published
-  deploy_azure:
+  deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -53,10 +53,22 @@ jobs:
         publish-profile: ${{ secrets.PUBLISH_CREDENTIALS_DEV }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
   update_settings:
-    needs: deploy_azure
+    needs: deploy
     runs-on: ubuntu-latest
     steps:
     - uses: azure/login@v1.1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - run: az webapp list --query "[?state=='Running']"
+    - uses: azure/appservice-settings@v1
+      with:
+        # extracted from https://github.com/marketplace/actions/azure-app-service-settings
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        # slot-name: 'staging'  # Optional and needed only if the settings have to be configured on the specific deployment slot
+        app-settings-json: '${{ secrets.APP_SETTINGS }}' 
+        #connection-strings-json: '${{ secrets.CONNECTION_STRINGS }}'
+        #general-settings-json: '{"alwaysOn": "false", "webSocketsEnabled": "true"}' #'General configuration settings as Key Value pairs'
+      id: settings
+    - run: echo "The webapp-url is ${{ steps.settings.outputs.webapp-url }}"
+    - run: |
+        az logout
