@@ -59,5 +59,4 @@ jobs:
     - uses: azure/login@v1.1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - run: |
-      az webapp list --query "[?state=='Running']"
+    - run: az webapp list --query "[?state=='Running']"
