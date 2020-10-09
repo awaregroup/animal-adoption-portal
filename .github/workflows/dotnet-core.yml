@@ -1,0 +1,74 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  AZURE_WEBAPP_NAME: AZmeerkTesting    # set this to your application's name
+  VERSION: 1.0.0
+  AZURE_WEBAPP_PACKAGE_PATH: '.'       # set this to the path to your web app project, defaults to the repository root
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Dotnet pack
+      run: dotnet pack -o . -p:PackageVersion=${{ env.VERSION }}.${{ github.run_number }}
+    - name: Add NuGet Source
+      run: dotnet nuget add source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json -n github -u ${{ github.repository_owner }} -p ${{ secrets.PACKAGES_PAT }} --store-password-in-clear-text
+    - name: Publish NuGet Package
+      run: dotnet nuget push *.nupkg --source "github" --api-key ${{ secrets.PACKAGES_PAT }} --skip-duplicate
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test AnimalAdoption.Web.Portal.UnitTests --no-restore --verbosity normal
+    - name: Publish
+      run: dotnet publish AnimalAdoption.Web.Portal -o AnimalAdoption.Web.Portal/published
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: published_portal
+        path: ${{ github.workspace }}/AnimalAdoption.Web.Portal/published
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: published_portal
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.PUBLISH_CREDENTIALS_DEV }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+  update_settings:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - run: az webapp list --query "[?state=='Running']"
+    - uses: azure/appservice-settings@v1
+      with:
+        # extracted from https://github.com/marketplace/actions/azure-app-service-settings
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        # slot-name: 'staging'  # Optional and needed only if the settings have to be configured on the specific deployment slot
+        app-settings-json: '${{ secrets.APP_SETTINGS }}' 
+        #connection-strings-json: '${{ secrets.CONNECTION_STRINGS }}'
+        #general-settings-json: '{"alwaysOn": "false", "webSocketsEnabled": "true"}' #'General configuration settings as Key Value pairs'
+      id: settings
+    - run: echo "The webapp-url is ${{ steps.settings.outputs.webapp-url }}"
+    - run: |
+        az logout
