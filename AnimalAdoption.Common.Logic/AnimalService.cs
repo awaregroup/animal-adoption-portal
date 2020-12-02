@@ -7,9 +7,9 @@ namespace AnimalAdoption.Common.Logic
     public class AnimalService
     {
         public Animal[] ListAnimals => new Animal[] {
-            new Animal { Id = 1, Name = "Sedi", Age = 50, Description = "Soft natured" },
-            new Animal { Id = 2, Name = "Metamorph", Age = 50, Description = "Under a lot of pressure" },
-            new Animal { Id = 3, Name = "Igno", Age = 50, Description = "Shiny and glasslike" },
+            new Animal { Id = 1, Name = "cat", Age = 40, Description = "a small domesticated carnivorous mammal with soft fur, a short snout, and retractable claws. It is widely kept as a pet or for catching mice, and many breeds have been developed." },
+            new Animal { Id = 2, Name = "dog", Age = 30, Description = "a domesticated carnivorous mammal that typically has a long snout, an acute sense of smell, nonretractable claws, and a barking, howling, or whining voice." },
+            new Animal { Id = 3, Name = "duck", Age = 20, Description = "a waterbird with a broad blunt bill, short legs, webbed feet, and a waddling gait." },
         };
     }
 }
