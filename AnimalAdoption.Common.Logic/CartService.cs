@@ -45,6 +45,7 @@ namespace AnimalAdoption.Common.Logic
                 }
 
                 _cache.Set(cartId, domainCart);
+
                 return ListAnimals(cartId);
             }
             finally
@@ -58,7 +59,6 @@ namespace AnimalAdoption.Common.Logic
         {
             var domainCart = _cache.Get<CartData>(cartId);
             var allAnimals = _animalData.ListAnimals;
-
 
             var cartContents = allAnimals.Select(animal =>
             {
