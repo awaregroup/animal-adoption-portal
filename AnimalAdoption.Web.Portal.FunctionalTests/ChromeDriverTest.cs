@@ -2,12 +2,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
 using System;
 
 namespace AnimalAdoption.Web.Portal.FunctionalTests
 {
-    [TestClass]
+	[TestClass]
     public class ChromeDriverTest
     {
         // In order to run the below test(s), 

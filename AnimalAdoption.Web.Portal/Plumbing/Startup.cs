@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AnimalAdoption.Common.Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace AnimalAdoption.Web.Portal.Plumbing
 {
-    public class Startup
+	public class Startup
     {
         public Startup(IConfiguration configuration)
         {

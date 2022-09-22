@@ -1,6 +1,5 @@
 using AnimalAdoption.Common.Logic;
 using Microsoft.Extensions.Caching.Memory;
-using System;
 using System.Linq;
 using Xunit;
 

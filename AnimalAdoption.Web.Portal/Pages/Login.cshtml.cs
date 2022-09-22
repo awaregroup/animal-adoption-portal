@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using AnimalAdoption.Common.Logic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace AnimalAdoption.Web.Identity.Pages
 {
-    public class LoginModel : PageModel
+	public class LoginModel : PageModel
     {
         private IOptions<Configuration> _configuration;
         private LoginService _loginService;

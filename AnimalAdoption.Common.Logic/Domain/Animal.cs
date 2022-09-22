@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace AnimalAdoption.Common.Logic
+﻿namespace AnimalAdoption.Common.Logic
 {
-    public class Animal
+	public class Animal
     {
         public int Id { get; set; }
         public string Name { get; set; }

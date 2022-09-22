@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AnimalAdoption.Common.Logic
+﻿namespace AnimalAdoption.Common.Logic
 {
-    public class LoginService
+	public class LoginService
     {
         public string[] GetLoginIds()
         {

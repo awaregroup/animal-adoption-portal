@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AnimalAdoption.Common.Logic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AnimalAdoption.Web.Portal
 {
-    public class CartModel : PageModel
+	public class CartModel : PageModel
     {
         private readonly CartService _cartLogic;
 

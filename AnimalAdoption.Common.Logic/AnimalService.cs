@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AnimalAdoption.Common.Logic
+﻿namespace AnimalAdoption.Common.Logic
 {
-    public class AnimalService
+	public class AnimalService
     {
         public Animal[] ListAnimals => new Animal[] {
             new Animal { Id = 1, Name = "Sedi", Age = 50, Description = "Soft natured" },
