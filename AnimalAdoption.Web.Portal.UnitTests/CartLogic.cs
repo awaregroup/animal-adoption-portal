@@ -8,30 +8,50 @@ namespace AnimalAdoption.Service.Cart.UnitTests
 {
     public class CartTests
     {
-        [Fact]
-        public void CartManagement_EmptyCartAddAnimal_AnAnimalIsAdded()
+        private CartService _uut;
+
+        private const int TestAnimalId = 1;
+        private const string TestCartId = "TEST_CART_1";
+
+        public CartTests()
         {
-            var animalId = 1;
-            var quantityAmount = 1;
-
-            var memoryCache = new MemoryCache(new MemoryCacheOptions());
-            var resultingCart = new CartService(memoryCache, new AnimalService()).SetAnimalQuantity("TEST_CART", animalId, quantityAmount);
-
-            Assert.Equal("TEST_CART", resultingCart.Id);
-            Assert.Equal(1, resultingCart.CartContents.First(x=>x.Id == animalId).Quantity);
+            _uut = new CartService(new MemoryCache(new MemoryCacheOptions()), new AnimalService());
         }
 
         [Fact]
-        public void CartManagement_EmptyCartAddNegativeAnimal_AnAnimalDoesNotGoIntoNegative()
+        public void SetAnimalQuantity_AddsTheExpectedNumberOfAnimalsToTheCart_WhenTheNumberOfAnimalsToAddIsAboveZero()
         {
-            var animalId = 1;
-            var quantityAmount = -1;
+            // Arrange
+            var expectedNumberOfAnimalsInCart = 1;
+            var expectedCartId = TestCartId;
 
-            var memoryCache = new MemoryCache(new MemoryCacheOptions());
-            var resultingCart = new CartService(memoryCache, new AnimalService()).SetAnimalQuantity("TEST_CART", animalId, quantityAmount);
+            var animalIdToAddToTheCart = TestAnimalId;
+            var numberOfAnimalsToAddToTheCart = 1;
 
-            Assert.Equal("TEST_CART", resultingCart.Id);
-            Assert.Equal(0, resultingCart.CartContents.First(x => x.Id == animalId).Quantity);
+            // Act
+            var resultingCart = _uut.SetAnimalQuantity(expectedCartId, animalIdToAddToTheCart, numberOfAnimalsToAddToTheCart);
+
+            // Assert
+            Assert.Equal(expectedCartId, resultingCart.Id);
+            Assert.Equal(expectedNumberOfAnimalsInCart, resultingCart.CartContents.First(x=>x.Id == animalIdToAddToTheCart).Quantity);
+        }
+
+        [Fact]
+        public void SetAnimalQuantity_DoesNotAddAnyAnimalsToTheCart_WhenTheNumberOfAnimalsToAddIsBelowZero()
+        {
+            // Arrange
+            var expectedNumberOfAnimalsInCart = 0;
+            var expectedCartId = TestCartId;
+
+            var animalIdToAddToTheCart = TestAnimalId;
+            var numberOfAnimalsToAddToTheCart = -1;
+
+            // Act
+            var resultingCart = _uut.SetAnimalQuantity(expectedCartId, animalIdToAddToTheCart, numberOfAnimalsToAddToTheCart);
+
+            // Assert
+            Assert.Equal(expectedCartId, resultingCart.Id);
+            Assert.Equal(expectedNumberOfAnimalsInCart, resultingCart.CartContents.First(x => x.Id == animalIdToAddToTheCart).Quantity);
         }
     }
 }
